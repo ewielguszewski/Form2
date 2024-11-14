@@ -1,0 +1,21 @@
+﻿@model Form2.Models.Dane
+
+@*
+*@
+@{
+}
+<h1>Wynik</h1>
+Potwierdzam Twoje dane
+<br />
+Imie: @Model.Imie
+<br />
+Temat: @Model.Nazwisko
+<br />
+Email: @Model.Email
+<br />
+Telefon: @Model.Telefon
+<br />
+Wiek: @Model.Wiek
+<br />
+Miasto: @Enum.GetName(typeof(Form2.Models.Dane.Miasta), Model.Miasto)
+<br />

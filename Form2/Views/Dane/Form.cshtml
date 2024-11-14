@@ -1,0 +1,79 @@
+﻿@model Form2.Models.Dane
+
+
+
+@{
+}
+
+
+
+<form asp-action="Form" method="post">
+    <!-- Walidacja serwera -->
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label asp-for="Imie"></label>
+        <input asp-for="Imie" class="form-control" required minlength="2" />
+        <span asp-validation-for="Imie" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nazwisko"></label>
+        <input asp-for="Nazwisko" class="form-control" required minlength="2" />
+        <span asp-validation-for="Nazwisko" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Haslo"></label>
+        <input asp-for="Haslo" type="password" class="form-control" required minlength="8"
+               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" />
+        <span asp-validation-for="Haslo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PotwierdzHaslo">Potwierdź Hasło</label>
+        <input asp-for="PotwierdzHaslo" type="password" class="form-control" required minlength="8"
+               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" data-val-minlength="Hasło musi zawierać co najmniej 8 znaków."  
+               data-val-equalto="Hasła muszą być identyczne" />
+        <span asp-validation-for="PotwierdzHaslo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Telefon"></label>
+        <input asp-for="Telefon" type="tel" class="form-control" required
+               pattern="^(\+48\s?)?(\d{3}\s?\d{3}\s?\d{3})$" />
+        <span asp-validation-for="Telefon" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Wiek"></label>
+        <input asp-for="Wiek" type="number" class="form-control" required min="18" max="100" />
+        <span asp-validation-for="Wiek" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Miasto">Miasto</label>
+        <select asp-for="Miasto" asp-items="Html.GetEnumSelectList<Form2.Models.Dane.Miasta>()" class="form-control">
+            <option value="">Wybierz miasto</option>
+        </select>
+        <span asp-validation-for="Miasto" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zarejestruj sie</button>
+    <input type="reset" value="Wyczysc" class="btn btn-secondary" />
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validate-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+}
+
